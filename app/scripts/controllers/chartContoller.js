@@ -66,4 +66,6 @@ angular.module('sbAdminApp')
     	    'Pie' : 'PolarArea';
 		}
     };
+    
+    $scope.template = "NEW";
 }]);

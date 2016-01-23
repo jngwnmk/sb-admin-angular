@@ -37,4 +37,32 @@ angular.module('sbAdminApp')
         };
       }
     }
-  }]);
+  }])
+  .controller('SidebarCtrl',function($scope,AuthService){
+	    
+	    $scope.user = AuthService.currentUser();
+	   
+	    $scope.usertype = AuthService.currentUserType();
+	    
+	    if ($scope.usertype == 'ADMIN'){
+	      $scope.isAdmin = true;
+	      $scope.isUser = false;
+	    } else {
+	      $scope.isAdmin = false;
+	      $scope.isUser = true;
+	    }
+	    
+	    $scope.getSurveyType = function(type){
+	        if(type=='NEW'){
+	           return '신입회원';
+	        } else if(type=='OLD'){
+	            return '기존회원';
+	        } else if(type=='MANAGER'){
+	            return '관리자';
+	        }
+	    }
+	   
+	    setTimeout(function() {
+             $scope.$emit('SidebarCtrl');
+        }, 0);
+	});

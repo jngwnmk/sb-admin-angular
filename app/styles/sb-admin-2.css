@@ -5,8 +5,17 @@
  */
 
 body {
-    background-color: #f8f8f8;
+    /*background-color: #f7f7f7;
+    background-image: url('');*/
+/*    background: url(../image/background_sample.jpg) no-repeat center center fixed; */
+  background-color: #F8F8F8;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
+
+
 
 #wrapper {
     width: 100%;
@@ -14,7 +23,8 @@ body {
 
 #page-wrapper {
     padding: 0 15px;
-    min-height: 568px;
+    /*min-height: 1568px;*/
+    min-height: 100%;
     background-color: #fff;
 }
 
@@ -81,9 +91,11 @@ body {
 }
 
 .navbar-top-links .dropdown-user {
+    margin-left: 5px;
+/*
     right: 0;
     left: auto;
-}
+*/}
 
 .sidebar .sidebar-nav.navbar-collapse {
     padding-right: 0;

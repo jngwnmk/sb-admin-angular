@@ -1,42 +1,49 @@
-<div ng-controller="HomeCtrl">
+<div>
     <div class="row">
         <div class="col-lg-12">
-            <h3 class="page-header"></h3>
+            <h3 class="page-header">설문지 샘플</h3>
         </div>
         <!-- /.col-lg-12 -->
     </div>
-    <div class="row">
-        <div class="jumbotron">
-            <h4>아래의 내용을 복사한뒤, 고객들에게 문자를 보내세요</h4>
-            <br>
-            <p style="font-size: 14px; padding: 0 30px;">
-                [고객님을 위한 보다 나은 금융서비스를 제공해 드리기 위한 김철수 지점장의 설문] 안녕하세요. <span style="color:red">ING 김철수 지점장</span>입니다. 새해가 시작된지 엊그제 같은데 벌써 한해를 마무리 하는 12월입니다. 항상 배려해 주시고 응원해 주심에 감사드립니다. 고객님께 보다 나은 금융서비스를 제공해 드리기 위하여 첫단계로 TOM'Q 금융경제연구소를 통해 간단한 설문 요청 드리려고 합니다. TOM'Q 금융경제연구소는 베인 앤 컴퍼니 컨설팅 회사 출신의 컨설턴트로 부터 자문을 받아 다양한 금융, 경제 관련 뉴스와 보고서를 제공하고 있습니다. 설문에 1분만(총 15문항) 투자해 주시면 고객님께 더 적합하고, 안정적인 금융서비스를 제공해 드릴것을 약속드립니다. 감사합니다^^<br><a href="https://docs.google.com/forms/">https://docs.google.com/forms/</a>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-6 col-sm-12" id="line-chart">
-            <div class="panel panel-info">
-                <div class="panel-heading">설문내용 확인</div>
+    
+    <div class="row" ng-controller="SurveyTmpCtrl">
+        <div class="col-lg-4 col-sm-12" ng-repeat = "template in surveytemplates">
+            <div class="panel panel-green" ng-if = "template.type=='NEW'">
+                <div class="panel-heading">
+                    {{template.type}}
+                </div>
                 <div class="panel-body">
-                    진행되는 설문지를 미리 확인해볼 수 있습니다.
+                    {{template.desc}}
                 </div>
                 <div class="panel-footer">
-                        <a href="/#/blank">view detail</a>
+                        <a ng-href="#/dashboard/blank/{{template.type}}">확인하기</a>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-6 col-sm-12" id="bar-chart">
-            <div class="panel panel-primary">
-                <div class="panel-heading">응답내용 확인</div>
+            <div class="panel panel-yellow" ng-if = "template.type=='EXPERT'">
+                <div class="panel-heading">
+                    {{template.type}}
+                </div>
                 <div class="panel-body">
-                    본 서비스는 유료 고객에게만 제공됩니다.
+                    {{template.desc}}
                 </div>
-                <div class="panel-footer" ng-show="isPaid">
-                        <a href="/#/answer">view detail</a>
+                <div class="panel-footer">
+                    <a ng-href="#/dashboard/blank/{{template.type}}">확인하기</a>
                 </div>
             </div>
+            <div class="panel panel-red" ng-if = "template.type=='MANAGER'">
+                <div class="panel-heading">
+                    {{template.type}}
+                </div>
+                <div class="panel-body">
+                    {{template.desc}}
+                </div>
+                <div class="panel-footer">
+                    <a ng-href="#/dashboard/blank/{{template.type}}">확인하기</a>
+                </div>
+            </div>
+            
         </div>
+        
     </div>
 
 

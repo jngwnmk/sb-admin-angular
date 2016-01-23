@@ -1,9 +1,175 @@
-<div class="container-fluid">
+<style>
+.question1{
+	margin-bottom: 30px;
+}
+.question2{
+	margin-bottom: 30px;
+}
+.question3{
+	margin-bottom: 30px;
+}
+#small{
+	font-size: 65%;
+}
+.question2 .radio .form-control {
+	height: 25px;
+}
+.row{
+	background-color: #144169;
+}
+.footer{
+	border-left:0px;
+	text-align: -webkit-center;
+    font-size: smaller;
+}
+</style>
+
+
+<div class="container-fluid" ng-controller="SurveyCtrl">
 	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header">Blank</h1>
-		</div>
-		<!-- /.col-lg-12 -->
+		<div class="col-md-6 col-md-offset-3" style="background-color:white;">
+			<h1 class="page-header" style="font-size: 25px; font-weight: 800;line-height:1.3; padding:8px 0px;">[고객님을 위한 보다 나은 금융서비스를 제공해 드리기 위한 김철수 지점장의 설문] </h1>
+			<div class="well">
+				<h3 style="font-size: 14px; font-weight: initial; line-height:inherit; margin-bottom:30px;">안녕하세요. ING 김철수 지점장입니다. 새해가 시작된지 엊그제 같은데 벌써 한해를 마무리 하는 12월입니다. 항상 배려해 주시고 응원해 주심에 감사드립니다. 고객님께 보다 나은 금융서비스를 제공해 드리기 위하여 첫단계로 TOM'Q 금융경제연구소를 통해 간단한 설문 요청 드리려고 합니다. TOM'Q 금융경제연구소는 베인 앤 컴퍼니 컨설팅 회사 출신의 컨설턴트로 부터 자문을 받아 다양한 금융, 경제 관련 뉴스와 보고서를 제공하고 있습니다. 설문에 1분만(총 15문항) 투자해 주시면 고객님께 더 적합하고, 안정적인 금융서비스를 제공해 드릴것을 약속드립니다. 감사합니다^^</h3>
+				<h4 style="text-align:center;"><img src="../image/picture.png" alt="..." class="img-rounded"></h4>
+			</div>
+
+<!--설문질문들-->
+			<form>
+				<div ng-repeat = "question in surveytemplate.questions">
+					<div class="question1" ng-if="question.type == 'DESCRIPT'">
+						<p class="text-muted" style="font-size:18px;">{{question.no}}.{{replaceDesc(question.desc)}}</p>
+						<input type="text" class="form-control" placeholder="내 답변" ng-model="answerlist[question.no]" required>
+					</div>
+					
+					<div class = "question2" ng-if = "question.type == 'SELECT'">
+						<p class="text-muted" style="font-size:18px;">{{question.no}}.{{replaceDesc(question.desc)}}</p>
+	
+					   <div class="radio" ng-repeat="option in question.answer.options">
+					   		<label>
+						    	<input type="radio" name="{{question.no}}" id="optionsRadios1" ng-model="answerlist[question.no]" value="{{option.no}}.{{option.desc}}">
+						    		{{option.desc}}
+					  		</label>
+						</div>
+					</div>
+				</div>
+				
+				<!--<div class="question1">
+					<p class="text-muted" style="font-size:18px;">1.성함을 입력해 주십시요.</p>
+					<input type="text" class="form-control" placeholder="내 답변" required>
+				</div>
+				<div class="question2">
+					<p class="text-muted" style="font-size:18px;">2. 김정미 FP를 처음 만난해는 언제입니까?</p>
+					<h5>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+					    2015년
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+					    2012년~2014년
+					  </label>
+					</div><div class="radio">
+					  <label>
+					    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option3">
+					    2009년~2011년
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+					    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option4">
+					    2008년 포함 이전
+					  </label>
+					</div>
+					<div class="radio">
+					  <label>
+						<input type="radio" name="optionsRadios" id="optionsRadios2" value="option5">
+						<input type="text" class="form-control" placeholder="기타" >
+					  </label>
+					</div>
+				</div>
+				<div class="question3">
+				  <p class="text-muted" style="font-size:18px;">3.김정미 FP를 금융컨설턴트로 볼때 5점 만점에 몇점을 주실수 있을까요?
+				  	<br>
+				  	<small id="small">자질부족 ~ Best 금융컨설턴트</small>
+				  </p>
+
+					<label class="radio-inline">
+					  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option4"> 4
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option5"> 5
+					</label>
+				</div>-->
+				
+			  <button type="submit" class="btn btn-default"  style="margin:30px 0px;" ng-click="submitAnswer()">Submit</button>
+			</form>
+	    </div>
+	    
 	</div>
-	<!-- /.row -->
+	<blockquote class="footer">
+		  <p>본 설문은 FollowUs를 통해 제공되는 서비스입니다.</p>
+	</blockquote>
 </div>
+
+
+
+
+<!-- <div dir="auto" class="ss-item ss-item-required ss-radio">
+	<div class="ss-form-entry">
+		<label class="ss-q-item-label" for="entry_1669300401">
+			<div class="ss-q-title">5. 신재진 팀장과 금융거래를 하고 계시는 이유는 무엇인가요?
+				<label for="itemView.getDomIdToLabel()" aria-label="(필수 입력란)"></label>
+				<span class="ss-required-asterisk" aria-hidden="true">*</span>
+			</div>
+			<div class="ss-q-help ss-secondary-text" dir="auto">- 가장 중요한 이유 한가지
+			</div>
+		</label>
+		<ul role="radiogroup" aria-label="5. 신재진 팀장과 금융거래를 하고 계시는 이유는 무엇인가요? - 가장 중요한 이유 한가지 ">
+			<li class="ss-choice-item">
+				<label>
+					<span>
+						<input type="radio"role="radio" required="" aria-required="true">
+					</span>
+					<span class="ss-choice-label">원래 아는 지인이여서</span>
+				</label>
+			</li> 
+			<li class="ss-choice-item">
+				<label>
+					<span class="ss-choice-item-control goog-inline-block">
+						<input type="radio" name="entry.803042440" value="&#49457;&#54408;&#51060; &#51339;&#50500;&#49436;" id="group_803042440_2" role="radio" class="ss-q-radio" aria-label="&#49457;&#54408;&#51060; &#51339;&#50500;&#49436;" required="" aria-required="true">
+					</span>
+					<span class="ss-choice-label">성품이 좋아서</span>
+				</label>
+			</li>
+			<li class="ss-choice-item">
+				<label>
+					<span class="ss-choice-item-control goog-inline-block">
+						<input type="radio" name="entry.803042440" value="&#44552;&#50997;&#51032; &#51204;&#47928;&#44032;&#50668;&#49436;" id="group_803042440_3" role="radio" class="ss-q-radio" aria-label="&#44552;&#50997;&#51032; &#51204;&#47928;&#44032;&#50668;&#49436;" required="" aria-required="true">
+					</span>
+					<span class="ss-choice-label">금융의 전문가여서</span>
+				</label>
+			</li>
+			<li class="ss-choice-item"><label><span class="ss-choice-item-control goog-inline-block"><input type="radio" name="entry.803042440" value="&#44552;&#50997;&#44144;&#47000; &#49884;&##51216;&#50640; &#50694;&#50640; &#51080;&#50612;&#49436;" id="group_803042440_4" role="radio" class="ss-q-radio" aria-label="&#44552;&#50997;&#44144;&#47000; &#49884;&#51216;&#50640; &#50694;&#50640; &#51080;&#50612;&#49436;" required="" aria-required="true"></span>
+<span class="ss-choice-label">금융거래 시점에 옆에 있어서</span>
+</label></li> <li class="ss-choice-item"><label><span class="ss-choice-item-control goog-inline-block"><input type="radio" name="entry.803042440" value="&#45796;&#47480; &#49324;&#46988;&#50640;&#44172; &#49548;&#44060;&#47484; &#48155;&#50500;&#49436;" id="group_803042440_5" role="radio" class="ss-q-radio" aria-label="&#45796;&#47480; &#49324;&#46988;&#50640;&#44172; &#49548;&#44060;&#47484; &#48155;&#50500;&#49436;" required="" aria-required="true"></span>
+<span class="ss-choice-label">다른 사람에게 소개를 받아서</span>
+</label></li> <li class="ss-choice-item"><label><span class="ss-choice-item-control goog-inline-block"><input type="radio" name="entry.803042440" value="&#44536;&#45285;" id="group_803042440_6" role="radio" class="ss-q-radio" aria-label="&#44536;&#45285;" required="" aria-required="true"></span>
+<span class="ss-choice-label">그냥</span>
+</label></li> <li class="ss-choice-item"><label><span class="ss-choice-item-control goog-inline-block"><input type="radio" name="entry.803042440" value="__other_option__" id="group_803042440_7" role="radio" class="ss-q-radio ss-q-other-toggle" required="" aria-required="true"></span>
+<span class="ss-choice-label">기타:</span></label>
+<span class="ss-q-other-container goog-inline-block"><input type="text" name="entry.803042440.other_option_response" value="" class="ss-q-other" id="entry_803042440_other_option_response" dir="auto" aria-label="기타"></span>
+</li></ul> -->
+
