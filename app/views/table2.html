@@ -20,7 +20,7 @@
                             <tr>
                                 <th>이름</th>
                                 <th>소속</th>
-                                <th>문자복사</th>
+                                <!--<th>문자복사</th>-->
                                 <th>결제여부</th>
                                 <th>설문내용</th>
                                 <th>설문결과</th>
@@ -34,16 +34,16 @@
                             <tr class="odd gradeX" ng-repeat = "user in users">
                                 <td>{{user.username}}</td>
                                 <td>{{user.organization}}</td>
-                                <td><a>문자복사</a></td>
+                                <!--<td><a>문자복사</a></td>-->
                                 <td>
-                                    {{user.paid ? '결제완료' : '미결제'}}
+                                    {{checkPaid(user.paid)}}
                                 </td>
-                                <td><a>설문내용</a></td>
-                                <td><a>설문결과</a></td>
+                                <td><a href="#/blank/survey/{{user.cellphone}}">설문내용</a></td>
+                                <td><a href="#/answer/{{user.username}}/{{user._id}}">설문결과</a></td>
                                 <td>{{user.surveytype}}</td>
                                 <td>{{user.cellphone}}</td>
                                 <td>{{user.position}}</td>
-                                <td>{{user.date | date:'MM/dd/yyyy @ h:mma'}}</td>
+                                <td>{{user.date | date:'MM/dd/yyyy'}}</td>
                             </tr>
                             
                         </tbody>

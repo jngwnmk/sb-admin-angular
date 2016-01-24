@@ -1,13 +1,15 @@
 'use strict';
+
 angular.module('sbAdminApp')
   .controller('LoginCtrl',
-     function($window, $scope, $http, AuthService) {
+     function($window, $scope, $http, AuthService, Config) {
+     
      
      $scope.login = function () {
             var pwd = $scope.password;
             $http({
                 method: 'POST',
-                url: 'https://followus-jngwnmk.c9users.io/api/v1/login',
+                url: Config.getURL()+'api/v1/login',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 transformRequest: function(obj) {
                     var str = [];

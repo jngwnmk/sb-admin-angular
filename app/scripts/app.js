@@ -7,18 +7,24 @@
  *
  * Main module of the application.
  */
+ 
+ 
+
 angular
   .module('sbAdminApp', [
     'oc.lazyLoad',
     'ui.router',
     'ui.bootstrap',
     'angular-loading-bar',
+    'ngSanitize',
+    'ngS3upload',
     'ng'
-  ])
-  .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider','$httpProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider,$httpProvider) {
     
-    //$httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
-
+  ])
+  .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider','$httpProvider','ngS3Config',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider,$httpProvider, ngS3Config) {
+    
+    //ngS3Config.theme = 'bootstrap3';
+    
     $ocLazyLoadProvider.config({
       debug:false,
       events:true,
@@ -138,7 +144,7 @@ angular
         }
     })
       .state('dashboard.blank',{
-        templateUrl:'views/pages/blank.html',
+        templateUrl:'views/template.html',
         url:'/blank/:type',
         controller:'SurveyTmpDetailCtrl',
         resolve: {
@@ -176,7 +182,16 @@ angular
     })
       .state('dashboard.table',{
         templateUrl:'views/table.html',
-        url:'/table'
+        url:'/table',
+        controller:'UserEditCtrl',
+        resolve: {
+          loadMyFile:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+                name:'sbAdminApp',
+                files:['scripts/controllers/usereditController.js']
+            })
+          }
+        }
     })
       .state('dashboard.table2',{
         templateUrl:'views/table2.html',
@@ -217,7 +232,18 @@ angular
    })
       .state('answer',{
         templateUrl:'views/pages/answer.html',
-        url:'/answer'
+        url:'/answer/:username/:id',
+        controller : 'SurveyResultCtrl',
+        resolve : {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                 'scripts/controllers/surveyresultController.js'
+              ]
+            })
+          }
+        }
       })
       .state('blank',{
         templateUrl:'views/pages/blank.html',
@@ -234,8 +260,31 @@ angular
           }
         }
       })
+      .state('uploadtest',{
+        templateUrl : 'views/pages/uploadtest.html',
+        url : '/uploadtest',
+        controller: 'UploadCtrl',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                 'scripts/controllers/uploadController.js'
+              ]
+            })
+          }
+        }
+      });
    
   }]).
+  factory('Config', function(){
+      var url = "https://followus-jngwnmk.c9users.io/";
+      return {
+        getURL : function(){
+          return url;
+        }
+      };
+  }).
   factory( 'AuthService', function() {
       var currentUser;
       var loggedin = false;

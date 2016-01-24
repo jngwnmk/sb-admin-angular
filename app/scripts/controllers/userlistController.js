@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sbAdminApp')
-  .controller('UserListCtrl', function($scope, $http, Base64, AuthService) {
+  .controller('UserListCtrl', function($scope, $http, Base64, AuthService, Config) {
      
      var lastid = "";
      var firstid = "";
@@ -15,7 +15,7 @@ angular.module('sbAdminApp')
         $http(
          { 
           method: 'GET', 
-          url: 'https://followus-jngwnmk.c9users.io/api/v1/user', 
+          url: Config.getURL()+'api/v1/user', 
           headers: {
            'Authorization': encoded
           }
@@ -41,6 +41,14 @@ angular.module('sbAdminApp')
       ); //end of success
     }//end of if
     
+    $scope.checkPaid =function(isPaid){
+        if(isPaid){
+            return '결제완료';
+        } else {
+            return '미결제';
+        }
+    }
+    
     $scope.prev =function(){
       if(AuthService.isLoggedIn()){
           console.log("prev");
@@ -51,7 +59,7 @@ angular.module('sbAdminApp')
           $http(
            { 
             method: 'GET', 
-            url: 'https://followus-jngwnmk.c9users.io/api/v1/user/prev/'+firstid, 
+            url: Config.getURL()+'api/v1/user/prev/'+firstid, 
             headers: {
              'Authorization': encoded
             }
@@ -61,15 +69,14 @@ angular.module('sbAdminApp')
                 ///data.users.sort(function(a, b) {
                   //return parseFloat(a._id) - parseFloat(b._id);
                 //});
-                data.users.reverse();
-                $scope.users = data.users;
                 if(data.users.length>=1){
+                  data.users.reverse();
+                  $scope.users = data.users;
                   firstid = data.users[0]._id;
                   lastid = data.users[data.users.length-1]._id;
-                  
-                console.log('first is '+data.users[0].username);
-                console.log('last is '+data.users[data.users.length-1].username);
-              }
+                  console.log('first is '+data.users[0].username);
+                  console.log('last is '+data.users[data.users.length-1].username);
+                }
           });
         
          /*$http.
@@ -102,7 +109,7 @@ angular.module('sbAdminApp')
           $http(
            { 
             method: 'GET', 
-            url: 'https://followus-jngwnmk.c9users.io/api/v1/user/next/'+lastid, 
+            url: Config.getURL()+'api/v1/user/next/'+lastid, 
             headers: {
              'Authorization': encoded
             }
@@ -110,14 +117,14 @@ angular.module('sbAdminApp')
           ).success(function(data) {
                 console.log(data);
           
-               $scope.users = data.users;
+               
             if(data.users.length>=1){
+              $scope.users = data.users;
               firstid = data.users[0]._id;
               lastid = data.users[data.users.length-1]._id;
-              
-            console.log('first is '+data.users[0].username);
-            console.log('last is '+data.users[data.users.length-1].username);
-              }
+              console.log('first is '+data.users[0].username);
+              console.log('last is '+data.users[data.users.length-1].username);
+            }
           });
           
           

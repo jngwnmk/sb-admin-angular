@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('sbAdminApp')
-  .controller('SurveyTmpCtrl', function($scope, $http) {
+  .controller('SurveyTmpCtrl', function($scope, $http, Config) {
      
      
      
      $http.
-      get('https://followus-jngwnmk.c9users.io/api/v1/surveyTemplate').
+      get(Config.getURL()+'api/v1/surveyTemplate').
       success(function(data) {
       
       console.log(data);

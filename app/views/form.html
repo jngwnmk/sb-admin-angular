@@ -14,7 +14,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <form role="form" ng-submit="registerUser()">
+                        <form role="form">
                             <div class="form-group">
                                 <label>이름</label>
                                 <input class="form-control" ng-model="username" required>
@@ -37,7 +37,8 @@
                             </div>
                             <div class="form-group">
                                 <label>설문용 사진</label>
-                                <input type="file">
+                                <input type="file" id="file-chooser" accept="image/jpeg">
+                                <div id="results"></div>
                             </div>
                             <div class="form-group">
                                 <label>설문지 옵션</label>

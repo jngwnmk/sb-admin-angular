@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('sbAdminApp')
-  .controller('UserAddCtrl', function($window,$scope, $http, Base64, AuthService) {
+  .controller('UserAddCtrl', function($window,$scope, $http, Base64, AuthService, Config) {
      
+      AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: 'ap-northeast-1:5a6fcdaf-d17b-4d7f-af1f-844fc3ee5562',
+      });
+      AWS.config.region = 'ap-northeast-1';
      
      $scope.registerUser = function()
      {
@@ -12,6 +16,9 @@ angular.module('sbAdminApp')
         var encoded = 'Basic ' + Base64.encode(AuthService.currentUser().cellphone + ':' + AuthService.getPwd());
       
         console.log("registerUser()");
+        
+        
+        
         
         var user = {
             user : {
@@ -32,24 +39,60 @@ angular.module('sbAdminApp')
         $http(
             {
                 method : 'POST',
-                url : 'https://followus-jngwnmk.c9users.io/api/v1/register',
+                url : Config.getURL()+'api/v1/register',
                 headers: {
                     'Authorization': encoded
                 },
                 data  : user
             }
         ).
-        success(function(data, status) {
-                console.log(data);
-                $window.location.href = '/#/dashboard/table2';
-                
-                /*var result;
-                result = JSON.parse(data.text);
-                if(result.msg == 'OK'){
+        success(function(newuser, status) {
+                console.log(newuser);
+                if(newuser!=null){
+                    var bucket = new AWS.S3({params: {Bucket: 'followus-img-backup'}});
+                    var fileChooser = document.getElementById('file-chooser');
+                    var file = fileChooser.files[0];
+                    var results = document.getElementById('results');
+                    if (file) 
+                    {
+                        results.innerHTML = '';
+                        console.log("user._id:"+newuser._id);
+                        var params = {Key: newuser._id+".jpg", ContentType: file.type, Body: file};
+                            bucket.upload
+                            (params, 
+                                function (err, data) 
+                                    {
+                                        results.innerHTML = err ? 'ERROR!' : 'UPLOADED.';
+                                        if(!err){
+                                            newuser.photo = "https://s3-ap-northeast-1.amazonaws.com/followus-img-backup/"+newuser._id+".jpg";
+                                            console.log(newuser);
+                                            $http(
+                                                {
+                                                    method : 'PUT',
+                                                    url : Config.getURL()+'api/v1/changeUserPhoto/'+newuser._id,
+                                                    headers: {
+                                                        'Authorization': encoded
+                                                    }
+                                                }
+                                            ).
+                                            success(function(data, status) {
+                                                
+                                                $window.location.href = '/#/dashboard/table2';      
+                                            });
+                                            
+                                              
+                                        } else {
+                                              window.alert('사진 등록 실패');
+                                        }
+                                        
+                                    }
+                            );
+                    } else {
+                              results.innerHTML = 'Nothing to upload.';
+                    }
                 } else {
                     window.alert('등록 실패');
-                }*/
-        
+                }
                 
         });
         };
