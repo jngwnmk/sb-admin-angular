@@ -36,7 +36,8 @@
                                 <td>{{user.organization}}</td>
                                 <!--<td><a>문자복사</a></td>-->
                                 <td>
-                                    {{checkPaid(user.paid)}}
+                                    <!--<div type='button' class =" btn btn-default" ng-click="changePaidStatus(user.paid)">{{checkPaid(user.paid)}}</div>-->
+                                    <toggle-switch ng-model = "user.paid" ng-click = "changePaidStatus(user.cellphone)"></toggle-switch>
                                 </td>
                                 <td><a href="#/blank/survey/{{user.cellphone}}">설문내용</a></td>
                                 <td><a href="#/answer/{{user.username}}/{{user._id}}">설문결과</a></td>
@@ -50,8 +51,8 @@
                     </table>
                 </div>
                 <!-- /.table-responsive -->
-                        <div type='button' class =" btn btn-default" ng-click="prev()">이전</div>
-                        <div type='button' class =" btn btn-default" ng-click="next()">다음</div> 
+                        <div type='button' class =" btn btn-default" ng-click="prev()" ng-show="showController">이전</div>
+                        <div type='button' class =" btn btn-default" ng-click="next()" ng-show="showController">다음</div> 
 
             </div>
             <!-- /.panel-body -->

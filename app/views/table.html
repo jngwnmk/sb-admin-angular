@@ -21,11 +21,11 @@
                             </div>
                             <div class="form-group">
                                 <label>전화번호</label>
-                                <input class="form-control" ng-model="cellphone">
+                                <input class="form-control" ng-model="cellphone" ng-pattern="/^\d{3}-\d{3,4}-\d{4}$/" ng-bind="cellphone | tel">
                             </div>
                             <div class="form-group">
                                 <label>비밀번호</label>
-                                <input class="form-control" ng-model="pwd">
+                                <input class="form-control" ng-model="pwd" type="password">
                             </div>
                             <div class="form-group">
                                 <label>소속</label>

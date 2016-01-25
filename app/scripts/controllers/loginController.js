@@ -4,7 +4,6 @@ angular.module('sbAdminApp')
   .controller('LoginCtrl',
      function($window, $scope, $http, AuthService, Config) {
      
-     
      $scope.login = function () {
             var pwd = $scope.password;
             $http({

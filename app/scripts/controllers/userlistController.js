@@ -7,8 +7,9 @@ angular.module('sbAdminApp')
      var firstid = "";
      $scope.hasPrev = false;
      $scope.hasNext = false;
+     $scope.showController = true;
      
-      if(AuthService.isLoggedIn()){
+  if(AuthService.isLoggedIn()){
         console.log(AuthService.currentUser().cellphone + " : " +AuthService.getPwd());
         var encoded = 'Basic ' + Base64.encode(AuthService.currentUser().cellphone + ':' + AuthService.getPwd());
         console.log(encoded);
@@ -21,7 +22,8 @@ angular.module('sbAdminApp')
           }
          }
         ).success(function(data) {
-            
+              $scope.showController = true;
+   
             console.log(data);
             $scope.users = data.users;
             if(data.users.length>=1){
@@ -39,13 +41,42 @@ angular.module('sbAdminApp')
             //});
         } 
       ); //end of success
-    }//end of if
+    }//end of     if
     
     $scope.checkPaid =function(isPaid){
         if(isPaid){
             return '결제완료';
         } else {
             return '미결제';
+        }
+    }
+    
+    $scope.changePaidStatus = function(user_cellphone){
+        if(AuthService.isLoggedIn()){
+          console.log(AuthService.currentUser().cellphone + " : " +AuthService.getPwd());
+          var encoded = 'Basic ' + Base64.encode(AuthService.currentUser().cellphone + ':' + AuthService.getPwd());
+           
+           var user = {
+                user : {
+                     cellphone : user_cellphone,
+                }
+            };
+          console.log(user);
+          $http(
+            { 
+                method: 'PUT', 
+                url: Config.getURL()+'api/v1/changePaidStatus', 
+                headers: {
+                 'Authorization': encoded
+                },
+                data  : user
+            }
+          ).success(function(data) {
+                $scope.showController = true;
+   
+                console.log(data.paid);
+            }
+          );    
         }
     }
     
@@ -65,6 +96,8 @@ angular.module('sbAdminApp')
             }
            }
           ).success(function(data) {
+                $scope.showController = true;
+   
                 console.log(data);
                 ///data.users.sort(function(a, b) {
                   //return parseFloat(a._id) - parseFloat(b._id);
@@ -79,22 +112,7 @@ angular.module('sbAdminApp')
                 }
           });
         
-         /*$http.
-          get('https://followus-jngwnmk.c9users.io/api/v1/user/prev/'+firstid).
-          success(function(data) {
-          
-          console.log(data);
-          
-          $scope.users = data.users;
-          if(data.users.length>=1){
-            firstid = data.users[0]._id;
-            lastid = data.users[data.users.length-1]._id;
-            
-          console.log('first is '+data.users[0].username);
-          console.log('last is '+data.users[data.users.length-1].username);
-          }
-    
-         });*/ 
+      
         }
       };
      
@@ -115,6 +133,8 @@ angular.module('sbAdminApp')
             }
            }
           ).success(function(data) {
+                $scope.showController = true;
+   
                 console.log(data);
           
                
@@ -128,23 +148,46 @@ angular.module('sbAdminApp')
           });
           
           
-            /*$http.
-            get('https://followus-jngwnmk.c9users.io/api/v1/user/next/'+lastid).
-            success(function(data) {
+        
+        }
+         
+     };
+     
+     $scope.keyword = "";
+     $scope.searchedUser = {};
+     $scope.search = function(){
+         console.log($scope.keyword);
+         if(AuthService.isLoggedIn()){
+             console.log(AuthService.currentUser().cellphone + " : " +AuthService.getPwd());
+            var encoded = 'Basic ' + Base64.encode(AuthService.currentUser().cellphone + ':' + AuthService.getPwd());
+            console.log(encoded);
+            $http(
+             { 
+              method: 'GET', 
+              url: Config.getURL()+'api/v1/user/search/'+$scope.keyword, 
+              headers: {
+               'Authorization': encoded
+              }
+         }
+        ).success(function(data) {
             
             console.log(data);
-            $scope.users = data.users;
+            $scope.searchedUser = data.users;
             if(data.users.length>=1){
               firstid = data.users[0]._id;
               lastid = data.users[data.users.length-1]._id;
-              
-            console.log('first is '+data.users[0].username);
-            console.log('last is '+data.users[data.users.length-1].username);
+              console.log('first is '+data.users[0].username);
+              console.log('last is '+data.users[data.users.length-1].username);
             }
-              
-          }); */ 
-        }
-         
+            
+            $scope.hasPrev = false;
+            $scope.hasNext = true;
+            
+            $scope.showController = false;
+            
+            } 
+          ); //end of success
+        }//end of 
      };
      
 

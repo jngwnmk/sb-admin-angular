@@ -4,6 +4,12 @@ angular.module('sbAdminApp')
   .controller('UserEditCtrl', function($window,$scope, $http, Base64, AuthService, Config) {
      
      
+     $scope.username = AuthService.currentUser().username;
+     $scope.cellphone = AuthService.currentUser().cellphone;
+     $scope.pwd = AuthService.getPwd();
+     $scope.position =AuthService.currentUser().position;
+     $scope.organization = AuthService.currentUser().organization;
+            
      $scope.editUser = function()
      {
         
@@ -12,6 +18,8 @@ angular.module('sbAdminApp')
             var encoded = 'Basic ' + Base64.encode(AuthService.currentUser().cellphone + ':' + AuthService.getPwd());
           
             console.log("editUser()");
+            
+            
             
             var user = {
                 user : {

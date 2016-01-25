@@ -41,7 +41,8 @@ angular
           loadMyFile:function($ocLazyLoad) {
             return $ocLazyLoad.load({
                 name:'sbAdminApp',
-                files:['scripts/controllers/loginController.js']
+                files:['scripts/controllers/loginController.js',
+                'scripts/filter/telephone/telephone.js']
             })
           }
         }
@@ -125,7 +126,8 @@ angular
           loadMyFile:function($ocLazyLoad) {
             return $ocLazyLoad.load({
                 name:'sbAdminApp',
-                files:['scripts/controllers/useraddController.js']
+                files:['scripts/controllers/useraddController.js',
+                'scripts/filter/telephone/telephone.js']
             })
           }
         }
@@ -178,7 +180,17 @@ angular
     })
       .state('dashboard.excel',{
         templateUrl:'views/excel.html',
-        url:'/excel'
+        url:'/excel',
+        controller:'ExcelCtrl',
+        resolve: {
+          loadMyFile:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+                name:'sbAdminApp',
+                files:['scripts/controllers/excelController.js',
+                      ]
+            })
+          }
+        }
     })
       .state('dashboard.table',{
         templateUrl:'views/table.html',
@@ -188,7 +200,8 @@ angular
           loadMyFile:function($ocLazyLoad) {
             return $ocLazyLoad.load({
                 name:'sbAdminApp',
-                files:['scripts/controllers/usereditController.js']
+                files:['scripts/controllers/usereditController.js',
+                      'scripts/filter/telephone/telephone.js']
             })
           }
         }
@@ -205,7 +218,19 @@ angular
             })
           }
         }
-    })
+    }).state('dashboard.table2.search',{
+        templateUrl:'views/table2.html',
+        url:'/table2/:type',
+        controller:'UserListCtrl',
+        resolve: {
+          loadMyFile:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+                name:'sbAdminApp',
+                files:['scripts/controllers/userlistController.js']
+            })
+          }
+        }
+      })
       .state('dashboard.panels-wells',{
           templateUrl:'views/ui-elements/panels-wells.html',
           url:'/panels-wells'
@@ -278,7 +303,8 @@ angular
    
   }]).
   factory('Config', function(){
-      var url = "https://followus-jngwnmk.c9users.io/";
+      var testurl = "https://followus-jngwnmk.c9users.io/";
+      var url = "https://followus-jngwnmk.c9users.io/";//"http://default-environment-2idebhmppn.elasticbeanstalk.com/";
       return {
         getURL : function(){
           return url;
@@ -392,6 +418,6 @@ angular
             return output;
         }
     };
-});;
+});
   
     

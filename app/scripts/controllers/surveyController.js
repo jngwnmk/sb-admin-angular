@@ -32,7 +32,7 @@ angular.module('sbAdminApp')
       
                     console.log(data);
                     $scope.surveytemplate = data.surveytemplate;
-                    $scope.question_num = $scope.surveytemplate.length; 
+                    $scope.question_num = $scope.surveytemplate.questions.length; 
                 });
                 
                
