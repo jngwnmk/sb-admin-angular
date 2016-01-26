@@ -8,8 +8,18 @@ angular.module('sbAdminApp')
       });
       AWS.config.region = 'ap-northeast-1';
      
+     
+        $scope.paid = 'false';
+        $scope.surveytype = 'NEW';
+        $scope.username = '';
+        $scope.add_new_cellphone='';
+        $scope.add_new_pwd='';
+        $scope.position = '';
+        $scope.organization = '';
+        
      $scope.registerUser = function()
      {
+        
         
     if(AuthService.isLoggedIn()){
         console.log(AuthService.currentUser().cellphone + " : " +AuthService.getPwd());
@@ -17,21 +27,26 @@ angular.module('sbAdminApp')
       
         console.log("registerUser()");
         
-        
-        
+        var filter = function(paid){
+            if(paid=='false'){
+                return false;
+            } else {
+                return true;
+            }
+        }
         
         var user = {
             user : {
                 username : $scope.username,
                  usertype : 'USER',
-                 cellphone : $scope.cellphone,
-                 pwd : $scope.pwd,
+                 cellphone : $scope.add_new_cellphone,
+                 pwd : $scope.add_new_pwd,
                  position : $scope.position,
                  surveytype : $scope.surveytype,
                  organization : $scope.organization,
                  introduction : "introduction",
                  photo : 'http://test.com',
-                 paid :$scope.paid
+                 paid : filter($scope.paid)
             }
         };
         
@@ -53,8 +68,7 @@ angular.module('sbAdminApp')
                     var fileChooser = document.getElementById('file-chooser');
                     var file = fileChooser.files[0];
                     var results = document.getElementById('results');
-                    if (file) 
-                    {
+                    if(fileChooser.files.length!=0){
                         results.innerHTML = '';
                         console.log("user._id:"+newuser._id);
                         var params = {Key: newuser._id+".jpg", ContentType: file.type, Body: file};
@@ -79,8 +93,6 @@ angular.module('sbAdminApp')
                                                 
                                                 $window.location.href = '/#/dashboard/table2';      
                                             });
-                                            
-                                              
                                         } else {
                                               window.alert('사진 등록 실패');
                                         }
@@ -88,8 +100,10 @@ angular.module('sbAdminApp')
                                     }
                             );
                     } else {
-                              results.innerHTML = 'Nothing to upload.';
+                        $window.location.href = '/#/dashboard/table2'; 
                     }
+                            //  results.innerHTML = 'Nothing to upload.';
+                    
                 } else {
                     window.alert('등록 실패');
                 }

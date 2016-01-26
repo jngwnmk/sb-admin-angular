@@ -1,8 +1,8 @@
 <li class="sidebar-search">
-    <div class="input-group custom-search-form" ng-controller = "UserListCtrl">
-        <input type="text" class="form-control" placeholder="Search..." ng-model="keyword">
+    <div class="input-group custom-search-form">
+        <input type="text" id="keyword_input" class="form-control" placeholder="Search..." ng-model="keyword">
         <span class="input-group-btn">
-            <a ui-sref="dashboard.table2.search"><button class="btn btn-default" type="button" ng-click="search()">
+            <a ng-href="#/dashboard/search/{{query}}"><button class="btn btn-default" type="button" ng-click="search()">
                 <i class="fa fa-search"></i>
             </button></a>
         </span>

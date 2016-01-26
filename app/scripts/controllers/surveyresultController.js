@@ -11,15 +11,13 @@ angular.module('sbAdminApp')
             var encoded = 'Basic ' + Base64.encode(AuthService.currentUser().cellphone + ':' + AuthService.getPwd());
             console.log(encoded);
             
-            $scope.username = $stateParams.username;
-            
-           
-            
+            $scope.username = $stateParams.surveyUserName;
+
             //Survey Result
             $http(
              { 
               method: 'GET', 
-              url: Config.getURL()+'api/v1/surveyResult/'+$stateParams.id, 
+              url: Config.getURL()+'api/v1/surveyResult/'+$stateParams.requestUserId+'/'+$stateParams.surveyUserId, 
               headers: {
                'Authorization': encoded
               }

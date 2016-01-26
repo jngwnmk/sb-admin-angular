@@ -18,6 +18,7 @@ angular
     'angular-loading-bar',
     'ngSanitize',
     'ngS3upload',
+    'ngCookies',
     'ng'
     
   ])
@@ -47,7 +48,19 @@ angular
           }
         }
       })
-
+      .state('/logout',{
+          url:'/logout',
+          controller : 'LogoutCtrl',
+          resolve : {
+            loadMyFile:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+                name:'sbAdminApp',
+                files:['scripts/controllers/logoutController.js',
+                ]
+            })
+          } 
+          }
+      })
       .state('dashboard', {
         url:'/dashboard',
         templateUrl: 'views/dashboard/main.html',
@@ -116,7 +129,8 @@ angular
               ]
             })
           }
-        }
+        },
+        usertype : 'USER'
       })
       .state('dashboard.form',{
         templateUrl:'views/form.html',
@@ -130,7 +144,8 @@ angular
                 'scripts/filter/telephone/telephone.js']
             })
           }
-        }
+        },
+        usertype : 'ADMIN'
     })
       .state('dashboard.sample',{
         templateUrl:'views/sample.html',
@@ -143,7 +158,8 @@ angular
                 files:['scripts/controllers/surveytemplateController.js']
             })
           }
-        }
+        },
+        usertype : 'ADMIN'
     })
       .state('dashboard.blank',{
         templateUrl:'views/template.html',
@@ -156,7 +172,8 @@ angular
                 files:['scripts/controllers/surveytemplateDetailController.js']
             })
           }
-        }
+        },
+        usertype : 'ADMIN'
     })
       .state('dashboard.chart',{
         templateUrl:'views/chart.html',
@@ -176,7 +193,8 @@ angular
                 files:['scripts/controllers/chartContoller.js']
             })
           }
-        }
+        },
+        usertype : 'USER'
     })
       .state('dashboard.excel',{
         templateUrl:'views/excel.html',
@@ -190,7 +208,8 @@ angular
                       ]
             })
           }
-        }
+        },
+        usertype : 'ADMIN'
     })
       .state('dashboard.table',{
         templateUrl:'views/table.html',
@@ -204,7 +223,8 @@ angular
                       'scripts/filter/telephone/telephone.js']
             })
           }
-        }
+        },
+        usertype : 'USER'
     })
       .state('dashboard.table2',{
         templateUrl:'views/table2.html',
@@ -217,19 +237,21 @@ angular
                 files:['scripts/controllers/userlistController.js']
             })
           }
-        }
-    }).state('dashboard.table2.search',{
-        templateUrl:'views/table2.html',
-        url:'/table2/:type',
-        controller:'UserListCtrl',
+        },
+        usertype : 'ADMIN'
+    }).state('dashboard.search',{
+        templateUrl:'views/search.html',
+        url:'/search/:keyword',
+        controller:'UserSearchCtrl',
         resolve: {
           loadMyFile:function($ocLazyLoad) {
             return $ocLazyLoad.load({
                 name:'sbAdminApp',
-                files:['scripts/controllers/userlistController.js']
+                files:['scripts/controllers/usersearchController.js']
             })
           }
-        }
+        },
+        usertype : 'ADMIN'
       })
       .state('dashboard.panels-wells',{
           templateUrl:'views/ui-elements/panels-wells.html',
@@ -257,7 +279,7 @@ angular
    })
       .state('answer',{
         templateUrl:'views/pages/answer.html',
-        url:'/answer/:username/:id',
+        url:'/answer/:requestUserId/:surveyUserId/:surveyUserName',
         controller : 'SurveyResultCtrl',
         resolve : {
           loadMyFiles:function($ocLazyLoad) {
@@ -303,36 +325,44 @@ angular
    
   }]).
   factory('Config', function(){
-      var testurl = "https://followus-jngwnmk.c9users.io/";
-      var url = "https://followus-jngwnmk.c9users.io/";//"http://default-environment-2idebhmppn.elasticbeanstalk.com/";
+      var url = "https://followus-jngwnmk.c9users.io/";
+      //var url = "http://default-environment-2idebhmppn.elasticbeanstalk.com/";
       return {
         getURL : function(){
           return url;
         }
       };
   }).
-  factory( 'AuthService', function() {
-      var currentUser;
-      var loggedin = false;
-      var password = "";
+  factory( 'AuthService', function($cookieStore) {
+      //var currentUser;
+      //var loggedin = false;
+      //var password = "";
       return {
         login : function(pwd) { 
-          loggedin = true;
-          password = pwd;
+          $cookieStore.put('loggedin', 'true');
+          $cookieStore.put('password',pwd);
         },
         logout: function() { 
-          loggedin = false;
-          password = "";
+          $cookieStore.put('loggedin','');
+          $cookieStore.put('password','');
+          $cookieStore.put('currentuser','');
         },
         isLoggedIn: function() {
-          return loggedin;
+          return $cookieStore.get('loggedin');
         },
         getPwd : function(){
-          return password;
+          return $cookieStore.get('password');;
         },
-        setCurrentUser : function(user) { currentUser = user; }, 
-        currentUser : function() { return currentUser;},
-        currentUserType: function() { return currentUser.usertype; }
+        setCurrentUser : function(user) { 
+          //currentUser = user; 
+          $cookieStore.put('currentuser',user);
+        }, 
+        currentUser : function() { 
+          return $cookieStore.get('currentuser');
+        },
+        currentUserType: function() {
+          return $cookieStore.get('currentuser').usertype; 
+        }
       };
   }).
   factory('Base64', function() {
@@ -418,6 +448,19 @@ angular
             return output;
         }
     };
+}).run(function ($rootScope, $state,AuthService) {
+
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+      // User 서비스를 추가해서 현재 사용자가 인증된 사용자임을 확인한다.
+      if((AuthService.currentUserType() == 'ADMIN' && toState.usertype=='USER')||
+         (AuthService.currentUserType() == 'USER' && toState.usertype=='ADMIN')){
+          //$state.transitionTo('signin');
+          event.preventDefault();
+      }
+
+    });
+
 });
+  
   
     

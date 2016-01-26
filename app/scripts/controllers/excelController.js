@@ -3,6 +3,7 @@
 angular.module('sbAdminApp')
   .controller('ExcelCtrl', function($window,$scope, $http, Base64, AuthService, Config) {
      
+     
      $scope.userTotalNum = 0 ;
      $scope.userPaidNum = 0;
      
@@ -98,6 +99,7 @@ angular.module('sbAdminApp')
      setTimeout(function() {
              $scope.$emit('ExcelCtrl');
       }, 0);
-    
+     
    });
+  
   

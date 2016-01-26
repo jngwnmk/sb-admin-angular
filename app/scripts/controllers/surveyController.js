@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('sbAdminApp')
-  .controller('SurveyCtrl',function($scope,$http,$stateParams,Base64, Config){
+  .controller('SurveyCtrl',function($scope,$http,$stateParams,$window, Base64, Config){
     console.log($stateParams.userid);
     
         $scope.answerlist = {};
         $scope.username = "";
         $scope.type = "";
+        //To allow access for public, use admin's info for Authorization
+        //010-2222-2222 는 슈퍼 어드민
         var encoded = 'Basic ' + Base64.encode('010-2222-2222' + ':' + '2222');
         console.log(encoded);
         $http(
@@ -58,7 +60,8 @@ angular.module('sbAdminApp')
         }
        )    
       .success(function(data) {
-            window.alert('설문완료');  
+            window.alert('설문완료');
+            $window.close();
       });  
       
     }
@@ -66,6 +69,30 @@ angular.module('sbAdminApp')
     $scope.replaceDesc = function(desc){
         return desc.replace(/{USER}/gi, $scope.username);
     };
+    
+    $scope.keypressHandler = function(event, nextIdx){
+        if(event.keyCode == 13){
+            angular.element(
+                document.querySelector('#f_'+(nextIdx+1)))[0].focus();
+            
+            event.preventDefault();
+            return;                    
+        }
+    };
+    
+    
+    $scope.keypressHandlerForButton = function(event){
+        if(event.keyCode == 13){
+            angular.element(
+                document.querySelector('#f_'+(nextIdx+1)))[0].focus();
+            
+            event.preventDefault();
+            return;                       
+        }
+    };
+    
+    
+    
     
     setTimeout(function() {
                         $scope.$emit('SurveyCtrl');

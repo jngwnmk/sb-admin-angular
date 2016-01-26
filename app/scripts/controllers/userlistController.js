@@ -8,8 +8,10 @@ angular.module('sbAdminApp')
      $scope.hasPrev = false;
      $scope.hasNext = false;
      $scope.showController = true;
-     
+     $scope.currentUserId = AuthService.currentUser()._id;     
   if(AuthService.isLoggedIn()){
+      
+        
         console.log(AuthService.currentUser().cellphone + " : " +AuthService.getPwd());
         var encoded = 'Basic ' + Base64.encode(AuthService.currentUser().cellphone + ':' + AuthService.getPwd());
         console.log(encoded);
@@ -153,42 +155,7 @@ angular.module('sbAdminApp')
          
      };
      
-     $scope.keyword = "";
-     $scope.searchedUser = {};
-     $scope.search = function(){
-         console.log($scope.keyword);
-         if(AuthService.isLoggedIn()){
-             console.log(AuthService.currentUser().cellphone + " : " +AuthService.getPwd());
-            var encoded = 'Basic ' + Base64.encode(AuthService.currentUser().cellphone + ':' + AuthService.getPwd());
-            console.log(encoded);
-            $http(
-             { 
-              method: 'GET', 
-              url: Config.getURL()+'api/v1/user/search/'+$scope.keyword, 
-              headers: {
-               'Authorization': encoded
-              }
-         }
-        ).success(function(data) {
-            
-            console.log(data);
-            $scope.searchedUser = data.users;
-            if(data.users.length>=1){
-              firstid = data.users[0]._id;
-              lastid = data.users[data.users.length-1]._id;
-              console.log('first is '+data.users[0].username);
-              console.log('last is '+data.users[data.users.length-1].username);
-            }
-            
-            $scope.hasPrev = false;
-            $scope.hasNext = true;
-            
-            $scope.showController = false;
-            
-            } 
-          ); //end of success
-        }//end of 
-     };
+  
      
 
     setTimeout(function() {

@@ -17,6 +17,13 @@ angular.module('sbAdminApp')
       },
       controller:function($scope){
         $scope.selectedMenu = 'home';
+        $scope.keyword = '';
+        $scope.search = function(){
+          $scope.query = $scope.keyword;
+          $scope.keyword='';
+          
+        }
       }
+      
     }
   });

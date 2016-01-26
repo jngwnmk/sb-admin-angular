@@ -19,20 +19,25 @@ angular.module('sbAdminApp')
                 data: {cellphone: $scope.cellphone, password: $scope.password}
             }).success(function (data,status) {
                         console.log(data);
-                        console.log(data.user.usertype);
-                        if(data.user.usertype=='ADMIN'){
-                            console.log("password:"+pwd);
-                            $window.location.href = '/#/dashboard/table2';
-                              AuthService.setCurrentUser(data.user);
-                              AuthService.login(pwd);
-                        } else if(data.user.usertype=='USER'){
-                            $window.location.href = '/#/dashboard/home';
-                            AuthService.setCurrentUser(data.user);
-                            AuthService.login(pwd);
+                        if(data=='fail'){
+                            window.alert("아이디혹은 패스워드가 일치하지 않습니다.");
                         } else {
-                            $window.location.href = '/#/login';
-                            AuthService.logout();
+                            console.log(data.user.usertype);
+                            if(data.user.usertype=='ADMIN'){
+                                console.log("password:"+pwd);
+                                $window.location.href = '/#/dashboard/table2';
+                                  AuthService.setCurrentUser(data.user);
+                                  AuthService.login(pwd);
+                            } else if(data.user.usertype=='USER'){
+                                $window.location.href = '/#/dashboard/home';
+                                AuthService.setCurrentUser(data.user);
+                                AuthService.login(pwd);
+                            } else {
+                                $window.location.href = '/#/login';
+                                AuthService.logout();
+                            }    
                         }
+                        
             });
      };
      

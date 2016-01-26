@@ -45,6 +45,7 @@ angular.module('sbAdminApp')
             ).
             success(function(data, status) {
                     console.log(data);
+                    window.alert('정보수정을 위해 다시 로그인 합니다.');
                     $window.location.href = '/#/login';
             });
             };
