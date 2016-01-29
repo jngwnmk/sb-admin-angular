@@ -6,6 +6,7 @@
             <div class="panel-heading">
                 {{username}}님의 설문 응답내용(답변수: {{total}}개)
             </div>
+            <div type='button' class =" btn btn-default" ng-click="surveyDownByUser()">응답내용다운로드</div>
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="dataTable_wrapper">
@@ -27,7 +28,7 @@
                         </tbody>
                     </table>
                     <nav>
-  <ul class="pagination">
+  <!--<ul class="pagination">
     <li>
       <a href="#" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
@@ -36,7 +37,7 @@
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
-  </ul>
+  </ul>-->
 </nav>
                 </div>
                 <!-- /.table-responsive -->

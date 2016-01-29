@@ -24,6 +24,8 @@ angular.module('sbAdminApp')
             $scope.userPaidNum = info.paid;
         });
         
+    } else {
+        $window.location.href = '/#/login';
     }
     
     $scope.surveyDown = function(){

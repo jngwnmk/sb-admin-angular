@@ -20,7 +20,9 @@ angular.module('sbAdminApp')
     }
     
     $scope.replaceDesc = function(desc){
-        return desc.replace('{USER}', '김철수 지점장');
+        
+        return desc.replace(/{USER}/gi, '김철수').replace(/{POSITION}/gi, '지점장')
+                    .replace(/{SUFFIX1}/gi,'을').replace(/{SUFFIX2}/gi,'은');
     };
     
     setTimeout(function() {

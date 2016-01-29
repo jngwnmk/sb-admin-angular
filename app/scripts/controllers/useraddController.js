@@ -16,6 +16,12 @@ angular.module('sbAdminApp')
         $scope.add_new_pwd='';
         $scope.position = '';
         $scope.organization = '';
+        $scope.usePhoto = false;
+        $scope.suffix = 'type1';
+        
+        if(!AuthService.isLoggedIn()){
+            $window.location.href = '/#/login';
+        }
         
      $scope.registerUser = function()
      {
@@ -35,6 +41,22 @@ angular.module('sbAdminApp')
             }
         }
         
+        var suffix_1Filter = function(suffix){
+            if(suffix=='type1'){
+                return '을';
+            } else {
+                return '를';
+            }
+        }
+        
+        var suffix_2Filter = function(suffix){
+            if(suffix=='type1'){
+                return '은';
+            } else {
+                return '는';
+            }
+        }
+        
         var user = {
             user : {
                 username : $scope.username,
@@ -45,7 +67,9 @@ angular.module('sbAdminApp')
                  surveytype : $scope.surveytype,
                  organization : $scope.organization,
                  introduction : "introduction",
-                 photo : 'http://test.com',
+                 photo : '',
+                 suffix_1 : suffix_1Filter($scope.suffix),
+                 suffix_2 : suffix_2Filter($scope.suffix),
                  paid : filter($scope.paid)
             }
         };

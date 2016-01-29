@@ -4,6 +4,10 @@ angular.module('sbAdminApp')
   .controller('UserEditCtrl', function($window,$scope, $http, Base64, AuthService, Config) {
      
      
+     if(!AuthService.isLoggedIn()){
+         $window.location.href = '/#/login';
+        
+     }
      $scope.username = AuthService.currentUser().username;
      $scope.cellphone = AuthService.currentUser().cellphone;
      $scope.pwd = AuthService.getPwd();

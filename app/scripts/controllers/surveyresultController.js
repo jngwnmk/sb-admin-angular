@@ -1,18 +1,41 @@
 'use strict';
 
 angular.module('sbAdminApp')
-  .controller('SurveyResultCtrl',function($scope,$http,$stateParams,AuthService,Base64,Config){
+  .controller('SurveyResultCtrl',function($window, $scope,$http,$stateParams,AuthService,Base64,Config){
         
         $scope.username = "";
         $scope.total = 0;
-        
+        $scope.position = "";
+        $scope.suffix_1 = "";
+        $scope.suffix_2 = "";
         if(AuthService.isLoggedIn()){
             console.log(AuthService.currentUser().cellphone + " : " +AuthService.getPwd());
             var encoded = 'Basic ' + Base64.encode(AuthService.currentUser().cellphone + ':' + AuthService.getPwd());
             console.log(encoded);
             
             $scope.username = $stateParams.surveyUserName;
-
+            
+            if(AuthService.currentUser().usertype=='ADMIN'){
+                
+                $http({
+                    method : 'GET',
+                    url : Config.getURL()+'api/v1/user/searchbyid/'+$stateParams.surveyUserId,
+                    headers: {
+                        'Authorization': encoded
+                    }
+                }).success(function(user) {
+                    console.log(user);
+                    $scope.position = user.user.position;
+                    $scope.suffix_1  = user.user.suffix_1;
+                    $scope.suffix_2 = user.user.suffix_2;
+                });
+                
+            } else {
+                $scope.position = AuthService.currentUser().position;
+                $scope.suffix_1 = AuthService.currentUser().suffix_1;
+                $scope.suffix_2 = AuthService.currentUser().suffix_2;
+            }
+            
             //Survey Result
             $http(
              { 
@@ -39,21 +62,46 @@ angular.module('sbAdminApp')
                             $scope.surveytemplate = data.surveytemplate;
                     });    
                 }
-                
-            
-                
             } 
           ); //end of success
-        }//end of if
-    
+          
+          
+          
+          
+        }//end of if 
+        else {
+            $window.location.href = '/#/login';
+        }
     
     $scope.replaceDesc = function(desc){
-        return desc.replace(/{USER}/gi, $scope.username);
+        return desc.replace(/{USER}/gi, $scope.username).replace(/{POSITION}/gi, $scope.position)
+                    .replace(/{SUFFIX1}/gi,$scope.suffix_1).replace(/{SUFFIX2}/gi,$scope.suffix_2);
     };
     
+    $scope.surveyDownByUser = function(){
+        
+        var exportUrl = Config.getURL() + 'api/v1/exportByUser/' + $stateParams.surveyUserId;
+        var filename = $scope.username+'.csv';
+                        
+        $http({method: 'GET', url: exportUrl}).
+                              success(function(data, status, headers, config) {
+                                 
+                                 var anchor = angular.element('<a/>');
+                                 anchor.attr({
+                                     href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+                                     target: '_blank',
+                                     download : filename
+                                 })[0].click();
+                            
+                              }).
+                              error(function(data, status, headers, config) {
+                                // if there's an error you should see it here
+                              });
+        };
+    
     setTimeout(function() {
-                        $scope.$emit('SurveyResultCtrl');
-                    }, 0);
+        $scope.$emit('SurveyResultCtrl');
+    }, 0);
     
    
   });

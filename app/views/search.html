@@ -40,7 +40,7 @@
                                     <toggle-switch ng-model = "user.paid" ng-click = "changePaidStatus(user.cellphone)"></toggle-switch>
                                 </td>
                                 <td><a href="#/blank/survey/{{user.cellphone}}">설문내용</a></td>
-                                <td><a href="#/answer/{{user.username}}/{{user._id}}">설문결과</a></td>
+                                <td><a href="#/answer/{{currentUserId}}/{{user._id}}/{{user.username}}">설문결과</a></td>
                                 <td>{{user.surveytype}}</td>
                                 <td>{{user.cellphone}}</td>
                                 <td>{{user.position}}</td>

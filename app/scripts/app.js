@@ -19,6 +19,7 @@ angular
     'ngSanitize',
     'ngS3upload',
     'ngCookies',
+    'ngclipboard',
     'ng'
     
   ])
@@ -325,8 +326,8 @@ angular
    
   }]).
   factory('Config', function(){
-      //var url = "https://followus-jngwnmk.c9users.io/";
-      var url = "http://default-environment-2idebhmppn.elasticbeanstalk.com/";
+      var url = "https://followus-jngwnmk.c9users.io/";
+      //var url = "http://default-environment-2idebhmppn.elasticbeanstalk.com/";
       return {
         getURL : function(){
           return url;

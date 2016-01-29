@@ -55,7 +55,7 @@ angular.module('sbAdminApp')
 	    $scope.getSurveyType = function(type){
 	        if(type=='NEW'){
 	           return '신입회원';
-	        } else if(type=='OLD'){
+	        } else if(type=='EXPERT'){
 	            return '기존회원';
 	        } else if(type=='MANAGER'){
 	            return '관리자';

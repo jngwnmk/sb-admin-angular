@@ -7,7 +7,12 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-  .controller('ChartCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+  .controller('ChartCtrl', ['$window','$scope', '$timeout', 'AuthService', function ($window, $scope, $timeout, AuthService) {
+    
+    if(!AuthService.isLoggedIn()){
+        $window.location.href = '/#/login';
+    }  
+    
     $scope.line = {
 	    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
 	    series: ['Series A', 'Series B'],

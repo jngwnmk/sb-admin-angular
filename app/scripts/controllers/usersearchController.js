@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('sbAdminApp')
-  .controller('UserSearchCtrl', function($scope,$stateParams, $http, Base64, AuthService, Config) {
+  .controller('UserSearchCtrl', function($window, $scope,$stateParams, $http, Base64, AuthService, Config) {
         
+        $scope.currentUserId = AuthService.currentUser()._id;  
         if(AuthService.isLoggedIn()){
             
             console.log(AuthService.currentUser().cellphone + " : " +AuthService.getPwd());
@@ -21,7 +22,10 @@ angular.module('sbAdminApp')
             $scope.searchedUser = data.users;
             } 
         ); //end of success
-    };//end of if
+    }//end of if
+    else {
+        $window.location.href = '/#/login';
+    }    
     
     $scope.checkPaid =function(isPaid){
         if(isPaid){

@@ -29,28 +29,73 @@
 <div class="container-fluid" ng-controller="SurveyCtrl">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3" style="background-color:white;">
-			<h1 class="page-header" style="font-size: 25px; font-weight: 800;line-height:1.3; padding:8px 0px;">[고객님을 위한 보다 나은 금융서비스를 제공해 드리기 위한 {{username}} {{position}}의 설문] </h1>
+			<h1 class="page-header" style="font-size: 22px; font-weight: 800;line-height:1.3; padding:8px 0px;">[고객님께 보다 나은 금융서비스를 제공해 드리기 위한 {{username}} {{position}}의 설문] </h1>
 			<div class="well">
-				<h3 style="font-size: 14px; font-weight: initial; line-height:inherit; margin-bottom:30px;">안녕하세요. {{organization}} {{username}} {{position}}입니다. 새해가 시작된지 엊그제 같은데 벌써 한해를 마무리 하는 12월입니다. 항상 배려해 주시고 응원해 주심에 감사드립니다. 고객님께 보다 나은 금융서비스를 제공해 드리기 위하여 첫단계로 TOM'Q 금융경제연구소를 통해 간단한 설문 요청 드리려고 합니다. TOM'Q 금융경제연구소는 베인 앤 컴퍼니 컨설팅 회사 출신의 컨설턴트로 부터 자문을 받아 다양한 금융, 경제 관련 뉴스와 보고서를 제공하고 있습니다. 설문에 1분만(총 {{question_num}}문항) 투자해 주시면 고객님께 더 적합하고, 안정적인 금융서비스를 제공해 드릴것을 약속드립니다. 감사합니다^^</h3>
-				<h4 style="text-align:center;"><img ng-src="{{photo}}" alt="..." class="img-rounded"></h4>
+				<h3 style="font-size: 14px; font-weight: initial; line-height:inherit; margin-bottom:30px;">{{introduction}}</h3>
+				<div>
+					<font color="red">*필수항목</font>
+				</div>
+				<h4 style="text-align:center;">
+					<img ng-src="{{photo}}" alt="..." class="img-rounded" ng-show="isValidImg" style="max-hegiht: 260px; max-width: 200px;">
 			</div>
-
+			
 <!--설문질문들-->
 			<form ng-submit="submitAnswer()">
 				<div ng-repeat = "question in surveytemplate.questions">
+					
 					<div class="question1" ng-if="question.type == 'DESCRIPT'">
-						<p class="text-muted" style="font-size:18px;">{{question.no}}.{{replaceDesc(question.desc)}}</p>
-						<input type="text" class="form-control" placeholder=" " ng-model="answerlist[question.no]" id="f_{{question.no}}" g-keypress="keypressHandler($event, {{question.no}})" required>
+						<div ng-if = "question.required==true">
+							<p class="text-muted" style="font-size:18px;">{{question.no}}.{{replaceDesc(question.desc)}} <font color="red">*</font></p>
+							<input type="text" class="form-control" placeholder=" " ng-model="answerlist[question.no]" id="f_{{question.no}}" g-keypress="keypressHandler($event, {{question.no}})" required>	
+						</div>
+						<div ng-if = "question.required==false">
+							<p class="text-muted" style="font-size:18px;">{{question.no}}.{{replaceDesc(question.desc)}}</p>
+							<input type="text" class="form-control" placeholder=" " ng-model="answerlist[question.no]" id="f_{{question.no}}" g-keypress="keypressHandler($event, {{question.no}})">	
+				
+						</div>
 					</div>
 					
 					<div class = "question2" ng-if = "question.type == 'SELECT'">
-						<p class="text-muted" style="font-size:18px;">{{question.no}}.{{replaceDesc(question.desc)}}</p>
-	
-					   <div class="radio" ng-repeat="option in question.answer.options">
-					   		<label>
-						    	<input type="radio" name="{{question.no}}" id="f_{{question.no}}" ng-model="answerlist[question.no]" value="{{option.no}}.{{option.desc}}" g-keypress="keypressHandler($event, {{question.no}})">
-						    		{{option.desc}}
-					  		</label>
+						<div ng-if = "question.required==true">
+							<p class="text-muted" style="font-size:18px;">{{question.no}}.{{replaceDesc(question.desc)}} <font color="red">*</font></p>
+		
+						   <div class="radio" ng-repeat="option in question.answer.options">
+						   		<label ng-if="option.desc=='기타'">
+							    	<span>
+							    		<input type="radio" name="{{question.no}}" ng-model="answerlist[question.no]" id="f_{{question.no}}" value="{{option.no}}.{{option.desc}}" required g-keypress="keypressHandler($event, {{question.no}})" ng-change="selectRadio({{question.no}})">
+							    	</span>
+							    	<span>
+							    		기타<input type="text" ng-model="etcvalue[question.no]" ng-show="etclist[question.no]">
+							    	</span>
+							    	
+						  		</label>
+						  		<label ng-if="option.desc!='기타'">
+						  			<input type="radio" name="{{question.no}}" id="f_{{question.no}}" required ng-model="answerlist[question.no]" value="{{option.no}}.{{option.desc}}" g-keypress="keypressHandler($event, {{question.no}})" ng-change="selectRadio({{question.no}})">
+							    		{{option.desc}}
+							    	
+						  		</label>
+							</div>
+						</div>
+						<div ng-if = "question.required==false">
+							<p class="text-muted" style="font-size:18px;">{{question.no}}.{{replaceDesc(question.desc)}}</p>
+		
+						   <div class="radio" ng-repeat="option in question.answer.options">
+						   		<label ng-if="option.desc=='기타'">
+							    	<span>
+							    		<input type="radio" name="{{question.no}}" id="f_{{question.no}}" ng-model="answerlist[question.no]" value="{{option.no}}.{{option.desc}}" g-keypress="keypressHandler($event, {{question.no}})" ng-change="selectRadio({{question.no}})">
+							    	</span>
+							    	<span>
+							    		기타<input type="text" ng-model="etcvalue[question.no]" ng-show="etclist[question.no]">
+							    	</span>
+							    	
+							    </label>
+						  		<label ng-if="option.desc!='기타'">
+						  			<input type="radio" name="{{question.no}}" id="f_{{question.no}}" ng-model="answerlist[question.no]" value="{{option.no}}.{{option.desc}}" g-keypress="keypressHandler($event, {{question.no}})" ng-change="selectRadio({{question.no}})">
+							    		{{option.desc}}
+							    	
+						  		</label>
+							</div>
+							
 						</div>
 					</div>
 				</div>

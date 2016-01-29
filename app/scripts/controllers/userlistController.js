@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sbAdminApp')
-  .controller('UserListCtrl', function($scope, $http, Base64, AuthService, Config) {
+  .controller('UserListCtrl', function($window, $scope, $http, Base64, AuthService, Config) {
      
      var lastid = "";
      var firstid = "";
@@ -44,6 +44,9 @@ angular.module('sbAdminApp')
         } 
       ); //end of success
     }//end of     if
+    else {
+        $window.location.href = '/#/login';
+    }
     
     $scope.checkPaid =function(isPaid){
         if(isPaid){
