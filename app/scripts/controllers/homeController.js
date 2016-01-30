@@ -5,6 +5,7 @@ angular.module('sbAdminApp')
      
      $scope.introduction = "";
      $scope.introduction_prev = "";
+     $scope.url = "";
      if(AuthService.isLoggedIn()){
         $scope.isPaid = AuthService.currentUser().paid;
         $scope.cellphone = AuthService.currentUser().cellphone;
@@ -14,6 +15,7 @@ angular.module('sbAdminApp')
         $scope._id = AuthService.currentUser()._id;
         $scope.introduction = AuthService.currentUser().introduction;
         $scope.introduction_prev = AuthService.currentUser().introduction;
+        $scope.url = 'http://followus.co.kr/#/blank/survey/'+AuthService.currentUser().cellphone;
      } else {
         $window.location.href = '/#/login';
      }
@@ -57,6 +59,15 @@ angular.module('sbAdminApp')
      
      $scope.copyIntro = function(){
           console.log("copy intro");
+     };
+     
+     $scope.onSuccess = function(e){
+        console.info('Action:', e.action);
+        console.info('Text:', e.text);
+        console.info('Trigger:', e.trigger);
+        e.text.concat('/n').concat($scope.url);
+        //e.text += ('/n'+$scope.url);
+        //e.clearSelection();  
      };
      
      setTimeout(function() {
