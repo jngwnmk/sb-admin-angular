@@ -6,6 +6,7 @@ angular.module('sbAdminApp')
      
      $scope.userTotalNum = 0 ;
      $scope.userPaidNum = 0;
+     $scope.answerNum = 0;
      
     if(AuthService.isLoggedIn()){
         console.log(AuthService.currentUser().cellphone + " : " +AuthService.getPwd());
@@ -24,8 +25,87 @@ angular.module('sbAdminApp')
             $scope.userPaidNum = info.paid;
         });
         
+        $http(
+             { 
+              method: 'GET', 
+              url: Config.getURL()+'api/v1/surveryResultInfo', 
+              
+             }
+        ).success(function(info) {
+            $scope.answerNum = info.answer_num;
+            
+        });
+        
+        
+        
     } else {
         $window.location.href = '/#/login';
+    }
+    
+    $scope.surveyDownByType = function(){
+        console.log('survey down by type');
+        if(AuthService.isLoggedIn()){
+            var encoded = 'Basic ' + Base64.encode(AuthService.currentUser().cellphone + ':' + AuthService.getPwd());
+            $http({
+                method : 'GET',
+                url : Config.getURL()+'api/v1/exportByType/NEW',
+                headers : {
+                    'Authorization' : encoded
+                }
+            }).success(function(data, status, headers, config) {
+                                 
+                                 var anchor = angular.element('<a/>');
+                                 anchor.attr({
+                                     href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+                                     target: '_blank',
+                                     download : "설문결과(NEW).csv"
+                                 })[0].click();
+                            
+                              }).
+                              error(function(data, status, headers, config) {
+                                // if there's an error you should see it here
+                              });
+            
+            $http({
+                method : 'GET',
+                url : Config.getURL()+'api/v1/exportByType/EXPERT',
+                headers : {
+                    'Authorization' : encoded
+                }
+            }).success(function(data, status, headers, config) {
+                                 
+                                 var anchor = angular.element('<a/>');
+                                 anchor.attr({
+                                     href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+                                     target: '_blank',
+                                     download : "설문결과(EXPERT).csv"
+                                 })[0].click();
+                            
+                              }).
+                              error(function(data, status, headers, config) {
+                                // if there's an error you should see it here
+                              });
+            
+             $http({
+                method : 'GET',
+                url : Config.getURL()+'api/v1/exportByType/MANAGER',
+                headers : {
+                    'Authorization' : encoded
+                }
+            }).success(function(data, status, headers, config) {
+                                 
+                                 var anchor = angular.element('<a/>');
+                                 anchor.attr({
+                                     href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+                                     target: '_blank',
+                                     download : "설문결과(MANAGER).csv"
+                                 })[0].click();
+                            
+                              }).
+                              error(function(data, status, headers, config) {
+                                // if there's an error you should see it here
+                              });
+        }
     }
     
     $scope.surveyDown = function(){
