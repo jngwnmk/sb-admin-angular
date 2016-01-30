@@ -56,7 +56,7 @@ angular.module('sbAdminApp')
                                  
                                  var anchor = angular.element('<a/>');
                                  anchor.attr({
-                                     href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+                                     href: 'data:attachment/csv;charset=UTF-8,' + encodeURI(data),
                                      target: '_blank',
                                      download : "설문결과(NEW).csv"
                                  })[0].click();
@@ -76,7 +76,7 @@ angular.module('sbAdminApp')
                                  
                                  var anchor = angular.element('<a/>');
                                  anchor.attr({
-                                     href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+                                     href: 'data:attachment/csv;charset=UTF-8,' + encodeURI(data),
                                      target: '_blank',
                                      download : "설문결과(EXPERT).csv"
                                  })[0].click();
@@ -96,7 +96,7 @@ angular.module('sbAdminApp')
                                  
                                  var anchor = angular.element('<a/>');
                                  anchor.attr({
-                                     href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+                                     href: 'data:attachment/csv;charset=UTF-8,' + encodeURI(data),
                                      target: '_blank',
                                      download : "설문결과(MANAGER).csv"
                                  })[0].click();
@@ -140,7 +140,7 @@ angular.module('sbAdminApp')
                                  
                                  var anchor = angular.element('<a/>');
                                  anchor.attr({
-                                     href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+                                     href: 'data:attachment/csv;charset=UTF-8,' + encodeURI(data),
                                      target: '_blank',
                                      download : filenames[i]
                                  })[0].click();
@@ -167,7 +167,7 @@ angular.module('sbAdminApp')
                                  
                                  var anchor = angular.element('<a/>');
                                  anchor.attr({
-                                     href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+                                     href: 'data:attachment/csv;charset=UTF-8,' + encodeURI(data),
                                      target: '_blank',
                                      download : filename
                                  })[0].click();
