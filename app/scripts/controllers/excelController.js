@@ -171,7 +171,7 @@ angular.module('sbAdminApp')
                                      target: '_blank',
                                      download : filename
                                  })[0].click();
-                            
+                                 
                               }).
                               error(function(data, status, headers, config) {
                                 // if there's an error you should see it here
