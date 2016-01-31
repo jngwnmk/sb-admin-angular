@@ -64,10 +64,6 @@ angular.module('sbAdminApp')
                 }
             } 
           ); //end of success
-          
-          
-          
-          
         }//end of if 
         else {
             $window.location.href = '/#/login';

@@ -40,11 +40,14 @@
                                 <input name ="position" class="form-control" ng-model="position" required>
                                 <p ng-show="userEditForm.position.$invalid && !userEditForm.position.$pristine" class="help-block">직책을 입력해주세요.</p>
                             </div>
-                            <!-- <div class="form-group">
-                                <label>설문용 사진</label>
-                                <input type="file">
+                            <div class="form-group">
+                                <input type="checkbox" ng-model="usePhoto"><label>설문용 사진</label>
+                                <div ng-show="usePhoto">
+                                    <input name="photo" type="file" id="file-chooser" accept="image/jpeg">
+                                    <p ng-show="userForm.photo.$invalid && !userForm.photo.$pristine" class="help-block">사진파일을 선택해주세요.</p>
+                                    <div id="results"></div>
+                                </div>
                             </div>
-                            -->
                             <button type="submit" class="btn btn-default" ng-click="editUser()" ng-disabled="userEditForm.$invalid">수정완료</button>
                         </form>
                     </div>
