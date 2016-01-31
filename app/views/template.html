@@ -46,14 +46,14 @@
                                         <h4 class="modal-title" id="myModalLabel">인사말수정</h4>
                                       </div>
                                       <div class="modal-body">
-                                        <textarea ng-model ="introduction" style="height:250px;width:200px;max-width:600px;color:#999;font-weight:400;font-size:14px;"></textarea>
-                                      </div>
-                                      <div style="padding : 10px 10px;">
-                                      	[Tag 종류]<br>
-                                      	{{organization}} : 조직이름<br>
-                                      	{{username}} : 회원이름<br>
-                                      	{{position}} : 직급<br>
-                                      	{{question_num}} : 문항수
+                                      	<textarea ng-model ="introduction" class="form-control" rows="10"></textarea>
+	                                      <p class="text-warning" style="text-align: -webkit-center;">
+	                                      	인사말 수정시 아래 내용은 수정하시면 안됩니다!<br>
+	                                      	{{organization}} : 조직이름<br>
+	                                      	{{username}} : 회원이름<br>
+	                                      	{{position}} : 직급<br>
+	                                      	{{question_num}} : 문항수
+	                                      </p>
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="editIntro()">Save</button>
