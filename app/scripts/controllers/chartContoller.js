@@ -10,7 +10,8 @@ angular.module('sbAdminApp')
   .controller('ChartCtrl', ['$window','$scope', '$timeout', 'AuthService', function ($window, $scope, $timeout, AuthService) {
     
     if(!AuthService.isLoggedIn()){
-        $window.location.href = '/#/login';
+        var url = "http://" + $window.location.host + "/#/login";
+        $window.location.href = url;
     }  
     
     $scope.line = {
