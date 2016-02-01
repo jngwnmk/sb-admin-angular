@@ -39,7 +39,8 @@ angular.module('sbAdminApp')
         
         
     } else {
-        $window.location.href = '/#/login';
+        var url = "http://" + $window.location.host + "/#/login";
+        $window.location.href = url;
     }
     
     $scope.surveyDownByType = function(){

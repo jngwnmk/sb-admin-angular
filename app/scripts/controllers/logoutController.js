@@ -5,7 +5,8 @@ angular.module('sbAdminApp')
      function($window, $scope, $http, AuthService, Config) {
      
      AuthService.logout();
-     $window.location.href = '/#/login';
+     var url = "http://" + $window.location.host + "/#/login";
+        $window.location.href = url;
      
      setTimeout(function() {
              $scope.$emit('LogoutCtrl');

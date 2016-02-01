@@ -66,7 +66,8 @@ angular.module('sbAdminApp')
           ); //end of success
         }//end of if 
         else {
-            $window.location.href = '/#/login';
+            var url = "http://" + $window.location.host + "/#/login";
+        $window.location.href = url;
         }
     
     $scope.replaceDesc = function(desc){

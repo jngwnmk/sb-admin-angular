@@ -17,7 +17,8 @@ angular.module('sbAdminApp')
         $scope.introduction_prev = AuthService.currentUser().introduction;
         $scope.url = 'http://followus.co.kr/#/blank/survey/'+AuthService.currentUser().cellphone;
      } else {
-        $window.location.href = '/#/login';
+        var url = "http://" + $window.location.host + "/#/login";
+        $window.location.href = url;
      }
      
      $scope.editIntro = function(){

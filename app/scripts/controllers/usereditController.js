@@ -8,7 +8,8 @@ angular.module('sbAdminApp')
       AWS.config.region = 'ap-northeast-1';
      
      if(!AuthService.isLoggedIn()){
-         $window.location.href = '/#/login';
+         var url = "http://" + $window.location.host + "/#/login";
+        $window.location.href = url;
         
      }
      $scope.username = AuthService.currentUser().username;
@@ -82,7 +83,8 @@ angular.module('sbAdminApp')
                                             success(function(data, status) {
                                                 
                                                 window.alert('정보수정을 위해 다시 로그인 합니다.');
-                                                $window.location.href = '/#/login';   
+                                                var url = "http://" + $window.location.host + "/#/login";
+                                                $window.location.href = url;
                                             });
                                         } else {
                                               window.alert('사진 등록 실패');
