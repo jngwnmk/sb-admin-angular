@@ -6,6 +6,7 @@ angular.module('sbAdminApp')
      $scope.introduction = "";
      $scope.introduction_prev = "";
      $scope.url = "";
+     $scope.answer = 0;
      if(AuthService.isLoggedIn()){
         $scope.isPaid = AuthService.currentUser().paid;
         $scope.cellphone = AuthService.currentUser().cellphone;
@@ -16,6 +17,13 @@ angular.module('sbAdminApp')
         $scope.introduction = AuthService.currentUser().introduction;
         $scope.introduction_prev = AuthService.currentUser().introduction;
         $scope.url = 'http://followus.co.kr/#/blank/survey/'+AuthService.currentUser().cellphone;
+        $http({
+                    method : 'GET',
+                    url : Config.getURL()+'api/v1/surveryResultInfo/'+AuthService.currentUser()._id,
+        }).success(function(info) {
+                    $scope.answer = info.answer_num;
+        });
+                
      } else {
         var url = "http://" + $window.location.host + "/#/login";
         $window.location.href = url;
