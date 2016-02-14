@@ -63,9 +63,44 @@
                 <div class="panel-body">
                     본 서비스는 유료 고객에게만 제공됩니다.(응답수: {{answer}})
                 </div>
-                <div class="panel-footer" ng-show="isPaid">
+                
+                <div ng-switch on="isPaid">
+                    <div panel-footer ng-switch-when="true">
+                        <!-- fruits값이 apple일 때 해당 태그가 실행됩니다.-->
+                        <a href="/#/answer/{{_id}}/{{_id}}/{{username}}">view detail</a>
+                    </div>
+                    <div ng-switch-default>
+                        <!-- code to render the regular video block -->
+                        <a href="#/dashboard/home" data-toggle="modal" data-target="#myModal" >view detail</a>
+                    </div>
+                </div>
+
+                <!--<div class="panel-footer" ng-show="isPaid">
                         <a href="/#/answer/{{_id}}/{{_id}}/{{username}}">view detail</a>
                 </div>
+                <div class="panel-footer" ng-show="!isPaid">
+                    <a href="#/dashboard/home" data-toggle="modal" data-target="#myModal" >view detail</a>
+                </h4>-->
+
+                                <!--modal 내용-->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">응답내용 확인</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                          본 서비스는 유료 고객에게만 제공 됩니다. 
+                                          입금 시 답변내용 확인 가능 : 입금이 아직 확인 되지 않았습니다.
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!--modal끝-->
             </div>
         </div>
     </div>
