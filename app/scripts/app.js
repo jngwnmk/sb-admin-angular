@@ -63,6 +63,10 @@ angular
           } 
           }
       })
+      .state('/thankyou',{
+        url:'/thankyou',
+        templateUrl:'views/pages/thankyou.html'
+      })
       .state('dashboard', {
         url:'/dashboard',
         templateUrl: 'views/dashboard/main.html',

@@ -1,0 +1,224 @@
+<!-- <div class="row" style="background-color:white; height:100px; margin:0;">
+        FllowUs(Logo)
+</div> -->
+
+<style>
+body{
+    background-color:#fff;
+}
+.bg {
+   background: url(../image/bg.jpg) no-repeat center center; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: 85%;
+}
+
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  height: 500px;
+  margin-bottom: 60px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 500px;
+  background-color: #777;
+}
+.carousel-inner > .item > img {
+/*  position: initial;
+*/  top: 0;
+  left: 0;
+  min-width: 50%;
+  height: 500px;
+  margin:auto;
+}
+
+
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.team .col-lg-3 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.team h2 {
+  font-weight: normal;
+}
+.team .col-lg-3 p {
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 1750px;
+  }
+  /* Navbar positioning foo */
+  .navbar-wrapper {
+    margin-top: 20px;
+  }
+  .navbar-wrapper .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .navbar-wrapper .navbar {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  /* The navbar becomes detached from the top, so we round the corners */
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+}
+
+@media (min-width: 992px) {
+  .featurette-heading {
+    margin-top: 120px;
+  }
+}
+</style>
+
+ 
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#00BDD7; border:0px; margin-bottom:0px;">
+
+      <div class="container-fluid">
+        <div class="navbar-header">
+          
+        </div>
+        <ul class="nav navbar-nav"> 
+          <li>
+            <a class="navbar-brand" href="#/login" style="padding-top:8px;">
+              <img alt="Brand" src="../image/logo.jpg" style="max-height:35px;">
+            </a>
+          </li>
+          <li><a href="#/company" style="color:#fff;">회사 소개</a></li> 
+          <!-- <li><a href="#">언론 노출</a></li>  -->
+        </ul>
+    </div>
+</nav>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img class="first-slide" src="../image/company1.jpg" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h3>소개를 부탁해 – 화이트 위클리, 고객증대 및 서비스 향상 업무협약</h3>
+              <p><a class="btn btn-lg btn-primary" href="http://platum.kr/archives/54352" target="_blank" role="button">기사보러가기</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img class="second-slide" src="../image/company2.jpg" alt="Second slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h3>소개를 부탁해 – 비밀의 화원, 고객증대 및 서비스 향상 업무협약</h3>
+              <p><a class="btn btn-lg btn-primary" href="http://platum.kr/archives/54768" target="_blank" role="button">기사보러가기</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img class="third-slide" src="../image/company3.png" alt="Third slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h3>가정 방문 호텔 침구 서비스 ‘화이트 위클리’ 고객 재구매 솔루션 ‘소개를 부탁해’와 업무협약 체결</h3>
+              <p><a class="btn btn-lg btn-primary" href="http://kr.besuccess.com/2016/02/whiteweekly/" target="_blank" role="button">기사보러가기</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div><!-- /.carousel -->
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container team">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+
+        <div class="well" style="margin-bottom:100px; text-align:center;">
+                  소개를 부탁해는 [고객 재구매 또는 재방문 향상 솔루션]을 
+          서비스하는 스타트업입니다.<br> CTO를 제외한 보드멤버 전원이 증권사, 보험사 경력이 15년이 넘는
+          최고의 전문가들로 구성되어 있고,<br>  가장 까다롭다는 금융회사 고객들과의 십수년간의 직접 경험으로 
+          소개를 부탁해가 탄생하였습니다.<br> <br>  고객이 있는 모든 곳에 소개를 부탁해는 차별화된 솔루션을 
+          제공합니다.<br> 소개를 부탁해와 함께하여 귀사와 귀하의 사업이 번창하기를 기원합니다.
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <img class="img-circle" src="../image/member1.jpg" alt="Generic placeholder image" width="140" height="140">
+          <p>CEO 문성욱_금융 컨설팅,영업,관리 17년</p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-3">
+          <img class="img-circle" src="../image/member2.jpg" alt="Generic placeholder image" width="140" height="140">
+          <p>CSO 다니엘 전_금융 컨설팅,영업,관리 16년</p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-3">
+          <img class="img-circle" src="../image/member3.jpg" alt="Generic placeholder image" width="140" height="140">
+          <p>COO 이은숙_금융 컨설팅,영업,관리, 19년</p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-3">
+          <img class="img-circle" src="../image/member4.jpg" alt="Generic placeholder image" width="140" height="140">
+          <p>CTO 마이크 박_IT개발 5년</p>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+    </div>

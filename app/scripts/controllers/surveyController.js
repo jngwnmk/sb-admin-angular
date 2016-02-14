@@ -101,7 +101,8 @@ angular.module('sbAdminApp')
        )    
       .success(function(data) {
             window.alert('설문완료');
-            $window.close();
+            //$window.close();
+            $window.location.href = '/#/thankyou'; 
       });  
       
     };
