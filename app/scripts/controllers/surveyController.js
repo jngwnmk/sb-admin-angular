@@ -12,6 +12,8 @@ angular.module('sbAdminApp')
         $scope.isValidImg = true;
         $scope.suffix_1 = "";
         $scope.suffix_2 = "";
+        $scope.suffix_3 = "";
+        $scope.suffix_4 = "";
         $scope.introduction = "";
         $scope.surveytemplate = {};
         //To allow access for public, use admin's info for Authorization
@@ -37,6 +39,8 @@ angular.module('sbAdminApp')
                 $scope.photo = data.user.photo;
                 $scope.suffix_1 = data.user.suffix_1;
                 $scope.suffix_2 = data.user.suffix_2;
+                $scope.suffix_3 = data.user.suffix_3;
+                $scope.suffix_4 = data.user.suffix_4;
                 $scope.introduction = data.user.introduction;
                 if($scope.photo==''){
                     $scope.isValidImg = false;
@@ -114,9 +118,12 @@ angular.module('sbAdminApp')
     }
     
     $scope.replaceDesc = function(desc){
-        return desc.replace(/{USER}/gi, $scope.username).replace(/{POSITION}/gi, $scope.position)
-                    .replace(/{SUFFIX1}/gi,$scope.suffix_1).replace(/{SUFFIX2}/gi,$scope.suffix_2);
-    };
+         return desc.replace(/{USER}/gi, $scope.username)
+                   .replace(/{POSITION}/gi, $scope.position)
+                   .replace(/{SUFFIX1}/gi,$scope.suffix_1)
+                   .replace(/{SUFFIX2}/gi,$scope.suffix_2)
+                   .replace(/{SUFFIX3}/gi,$scope.suffix_3)
+                   .replace(/{SUFFIX4}/gi,$scope.suffix_4);    };
     
     $scope.keypressHandler = function(event, nextIdx){
         if(event.keyCode == 13){

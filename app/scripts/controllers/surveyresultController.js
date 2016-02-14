@@ -8,6 +8,9 @@ angular.module('sbAdminApp')
         $scope.position = "";
         $scope.suffix_1 = "";
         $scope.suffix_2 = "";
+        $scope.suffix_3 = "";
+        $scope.suffix_4 = "";
+        
         if(AuthService.isLoggedIn()){
             console.log(AuthService.currentUser().cellphone + " : " +AuthService.getPwd());
             var encoded = 'Basic ' + Base64.encode(AuthService.currentUser().cellphone + ':' + AuthService.getPwd());
@@ -26,14 +29,18 @@ angular.module('sbAdminApp')
                 }).success(function(user) {
                     console.log(user);
                     $scope.position = user.user.position;
-                    $scope.suffix_1  = user.user.suffix_1;
+                    $scope.suffix_1 = user.user.suffix_1;
                     $scope.suffix_2 = user.user.suffix_2;
+                    $scope.suffix_3 = user.user.suffix_3;
+                    $scope.suffix_4 = user.user.suffix_4;
                 });
                 
             } else {
                 $scope.position = AuthService.currentUser().position;
                 $scope.suffix_1 = AuthService.currentUser().suffix_1;
                 $scope.suffix_2 = AuthService.currentUser().suffix_2;
+                $scope.suffix_3 = AuthService.currentUser().suffix_3;
+                $scope.suffix_4 = AuthService.currentUser().suffix_4;
             }
             
             //Survey Result
@@ -71,8 +78,12 @@ angular.module('sbAdminApp')
         }
     
     $scope.replaceDesc = function(desc){
-        return desc.replace(/{USER}/gi, $scope.username).replace(/{POSITION}/gi, $scope.position)
-                    .replace(/{SUFFIX1}/gi,$scope.suffix_1).replace(/{SUFFIX2}/gi,$scope.suffix_2);
+        return desc.replace(/{USER}/gi, $scope.username)
+                   .replace(/{POSITION}/gi, $scope.position)
+                   .replace(/{SUFFIX1}/gi,$scope.suffix_1)
+                   .replace(/{SUFFIX2}/gi,$scope.suffix_2)
+                   .replace(/{SUFFIX3}/gi,$scope.suffix_3)
+                   .replace(/{SUFFIX4}/gi,$scope.suffix_4);
     };
     
     $scope.surveyDownByUser = function(){

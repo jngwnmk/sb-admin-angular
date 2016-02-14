@@ -58,6 +58,22 @@ angular.module('sbAdminApp')
             }
         }
         
+        var suffix_3Filter = function(suffix){
+            if(suffix=='type1'){
+                return '이'
+            } else {
+                return '가'
+            }
+        }
+        
+        var suffix_4Filter = function(suffix){
+            if(suffix=='type1'){
+                return '과'
+            } else {
+                return '와'
+            }
+        }
+        
         var user = {
             user : {
                 username : $scope.username,
@@ -71,6 +87,8 @@ angular.module('sbAdminApp')
                  photo : '',
                  suffix_1 : suffix_1Filter($scope.suffix),
                  suffix_2 : suffix_2Filter($scope.suffix),
+                 suffix_3 : suffix_3Filter($scope.suffix),
+                 suffix_4 : suffix_4Filter($scope.suffix),
                  paid : filter($scope.paid)
             }
         };

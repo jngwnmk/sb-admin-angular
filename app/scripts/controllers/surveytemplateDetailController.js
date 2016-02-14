@@ -21,7 +21,6 @@ angular.module('sbAdminApp')
         $scope.surveytemplate = data.surveytemplate;
         $scope.introduction = data.surveytemplate.defaultIntro;
         $scope.introduction_prev = data.surveytemplate.defaultIntro;
-       
         $scope.type = data.surveytemplate.type;
       });
     
@@ -31,8 +30,12 @@ angular.module('sbAdminApp')
     
     $scope.replaceDesc = function(desc){
         
-        return desc.replace(/{USER}/gi, '김철수').replace(/{POSITION}/gi, '지점장')
-                    .replace(/{SUFFIX1}/gi,'을').replace(/{SUFFIX2}/gi,'은');
+        return desc.replace(/{USER}/gi,'김철수')
+                   .replace(/{POSITION}/gi,'지점장')
+                   .replace(/{SUFFIX1}/gi,'을')
+                   .replace(/{SUFFIX2}/gi,'은')
+                   .replace(/{SUFFIX3}/gi,'이')
+                   .replace(/{SUFFIX3}/gi,'과');
     };
     
     $scope.editIntro = function(){
