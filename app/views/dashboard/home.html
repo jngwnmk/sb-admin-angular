@@ -65,13 +65,13 @@
                 </div>
                 
                 <div ng-switch on="isPaid">
-                    <div panel-footer ng-switch-when="true">
+                    <div class="panel-footer" panel-footer ng-switch-when="true">
                         <!-- fruits값이 apple일 때 해당 태그가 실행됩니다.-->
                         <a href="/#/answer/{{_id}}/{{_id}}/{{username}}">view detail</a>
                     </div>
-                    <div ng-switch-default>
+                    <div class="panel-footer" ng-switch-default>
                         <!-- code to render the regular video block -->
-                        <a href="#/dashboard/home" data-toggle="modal" data-target="#myModal" >view detail</a>
+                        <a href="#/dashboard/home" data-toggle="modal" data-target="#myPaidModal" >view detail</a>
                     </div>
                 </div>
 
@@ -83,7 +83,7 @@
                 </h4>-->
 
                                 <!--modal 내용-->
-                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal fade" id="myPaidModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                   <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                       <div class="modal-header">
