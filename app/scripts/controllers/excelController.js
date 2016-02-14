@@ -21,8 +21,8 @@ angular.module('sbAdminApp')
               }
              }
         ).success(function(info) {
-            $scope.userTotalNum = info.total;
-            $scope.userPaidNum = info.paid;
+            $scope.userTotalNum = info.total+60;
+            $scope.userPaidNum = info.paid+60;
         });
         
         $http(
@@ -32,7 +32,7 @@ angular.module('sbAdminApp')
               
              }
         ).success(function(info) {
-            $scope.answerNum = info.answer_num;
+            $scope.answerNum = info.answer_num+3012;
             
         });
         
