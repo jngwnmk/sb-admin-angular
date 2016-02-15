@@ -67,6 +67,10 @@ angular
         url:'/thankyou',
         templateUrl:'views/pages/thankyou.html'
       })
+      .state('/company',{
+        url:'/company',
+        templateUrl:'views/pages/company.html'
+      })
       .state('dashboard', {
         url:'/dashboard',
         templateUrl: 'views/dashboard/main.html',
