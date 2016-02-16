@@ -124,7 +124,9 @@ angular.module('sbAdminApp')
                    .replace(/{SUFFIX1}/gi,$scope.suffix_1)
                    .replace(/{SUFFIX2}/gi,$scope.suffix_2)
                    .replace(/{SUFFIX3}/gi,$scope.suffix_3)
-                   .replace(/{SUFFIX4}/gi,$scope.suffix_4);    };
+                   .replace(/{SUFFIX4}/gi,$scope.suffix_4)
+                   .replace(/{ORGANIZATION}/gi,$scope.organization);
+    };
     
     $scope.keypressHandler = function(event, nextIdx){
         if(event.keyCode == 13){

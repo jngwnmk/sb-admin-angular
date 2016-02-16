@@ -35,7 +35,8 @@ angular.module('sbAdminApp')
                    .replace(/{SUFFIX1}/gi,'을')
                    .replace(/{SUFFIX2}/gi,'은')
                    .replace(/{SUFFIX3}/gi,'이')
-                   .replace(/{SUFFIX3}/gi,'과');
+                   .replace(/{SUFFIX3}/gi,'과')
+                   .replace(/{ORGANIZATION}/gi,'미래에셋증권');
     };
     
     $scope.editIntro = function(){

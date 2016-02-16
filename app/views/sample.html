@@ -41,6 +41,17 @@
                     <a ng-href="#/dashboard/blank/{{template.type}}">확인하기</a>
                 </div>
             </div>
+             <div class="panel panel-red" ng-if = "template.type=='TRANSFER'">
+                <div class="panel-heading">
+                    {{template.type}}
+                </div>
+                <div class="panel-body">
+                    {{template.desc}}
+                </div>
+                <div class="panel-footer">
+                    <a ng-href="#/dashboard/blank/{{template.type}}">확인하기</a>
+                </div>
+            </div>
             
         </div>
         

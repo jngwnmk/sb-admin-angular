@@ -10,6 +10,7 @@ angular.module('sbAdminApp')
         $scope.suffix_2 = "";
         $scope.suffix_3 = "";
         $scope.suffix_4 = "";
+        $scope.organization = "";
         
         if(AuthService.isLoggedIn()){
             console.log(AuthService.currentUser().cellphone + " : " +AuthService.getPwd());
@@ -33,6 +34,7 @@ angular.module('sbAdminApp')
                     $scope.suffix_2 = user.user.suffix_2;
                     $scope.suffix_3 = user.user.suffix_3;
                     $scope.suffix_4 = user.user.suffix_4;
+                    $scope.organization = user.user.organization;
                 });
                 
             } else {
@@ -41,6 +43,7 @@ angular.module('sbAdminApp')
                 $scope.suffix_2 = AuthService.currentUser().suffix_2;
                 $scope.suffix_3 = AuthService.currentUser().suffix_3;
                 $scope.suffix_4 = AuthService.currentUser().suffix_4;
+                $scope.organization = AuthService.currentUser().organization;
             }
             
             //Survey Result
@@ -83,7 +86,8 @@ angular.module('sbAdminApp')
                    .replace(/{SUFFIX1}/gi,$scope.suffix_1)
                    .replace(/{SUFFIX2}/gi,$scope.suffix_2)
                    .replace(/{SUFFIX3}/gi,$scope.suffix_3)
-                   .replace(/{SUFFIX4}/gi,$scope.suffix_4);
+                   .replace(/{SUFFIX4}/gi,$scope.suffix_4)
+                   .replace(/{ORGANIZATION}/gi,$scope.organization);
     };
     
     $scope.surveyDownByUser = function(){
